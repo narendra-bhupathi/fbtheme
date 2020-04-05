@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+    
+    <form onsubmit="sendData();return false" >
+
+    <input type="text" name="user" id="name">
+    <input type="text" name="email" id="email">
+    <input type="submit" name="" id="submit">
+
+    </form>
+
+    <script>
+
+        
+    fetch('http://localhost:3030/').then(function(data){
+        console.log(data);
+        return data.json();
+    }).then(function(userdata){
+
+        console.log(userdata);
+    })
+
+        function sendData(){
+
+            var data={
+                name:document.getElementById('name').value,
+                email:document.getElementById('email').value
+            }
+
+        
+
+        fetch('http://localhost:3030/users',{
+            method:'POST',
+            headers:{
+                Accept:'application/json',
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+
+        })
+        .then(function(data)
+        {
+            console.log(data);
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+
+
+    }
+
+    </script>
+</body>
+</html>
